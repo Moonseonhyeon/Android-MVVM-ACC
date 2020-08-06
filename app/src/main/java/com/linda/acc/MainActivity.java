@@ -8,14 +8,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "Main_Activity";
     private NoteViewModel noteViewModel;
     private NoteAdapter noteAdapter;
     private RecyclerView recyclerView;
+    private FloatingActionButton mFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,5 +46,17 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
+    mFab = findViewById(R.id.fab);
+        mFab.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            int priority = new Random().nextInt(100)+1;
+           noteViewModel.추가하기(
+                   new Note("제목"+priority,"설명"+priority, priority)
+                   );
+             }
+         });
     }
 }
